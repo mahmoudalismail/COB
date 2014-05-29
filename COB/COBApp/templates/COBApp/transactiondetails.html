@@ -1,0 +1,85 @@
+{% extends "COBApp/header.html" %}
+
+{% load staticfiles %}
+
+{% block navigation %} 
+    <li>
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+    </li>
+    <li>
+        <a href="{% url 'expenseform' %}">New Expense Forms</a>
+    </li>
+    <li class='active'>
+        <a href="{% url 'history' clubID %}">Transaction History > Details </a>
+    </li>
+{% endblock %}
+
+{% block content %} 
+                <!--/span-->
+                <div class="span9" id="content">
+                   
+                    
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <!-- block -->
+                             <div class="block">
+                                <div class="navbar navbar-inner block-header">
+                                    <div class="muted pull-left">Transaction Summary</div>
+                                </div>
+                                <div class="block-content collapse in">
+                                  <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Category of Purchase</th>
+                                                <th>Method of Payment</th>
+                                                <th>Vendor or Store</th>
+                                                <th>Amount</th>
+                                                <th>Date</th>
+                                                <th>Date of Event</th>
+                                                <th>What did you buy?</th>
+                                                <th>Why did you buy it?</th>
+                                                <th>Receipt</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- stacking all the expenses in here -->
+                                        <tbody>
+                                        {% if details %}
+                                            
+                                            <tr>
+                                                <td>{{details.nameOfPayer}}</td>
+                                                <td>{{details.emailOfPayer}}</td>
+                                                <td>{{details.catOfPurchase}}</td>
+                                                <td>{{details.methodOfPayment}}</td>
+                                                <td>{{details.vendorStore}}</td>
+                                                <td>{{details.amount}}</td>
+                                                <td>{{details.date}}</td>
+                                                <td>{{details.timeOfEvent}}</td>
+                                                <td>{{details.purchases}}</td>
+                                                <td>{{details.justification}}</td>
+                                                <td>
+                                                    <button class="btn btn-info btn-mini" 
+                                                    onclick="location.href='{% url 'decode_receipt' details.id %}'">View</button>
+                                                </td>
+                                            </tr>
+                                            
+                                        {% endif %}
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /block -->
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+            <hr>
+        
+        </div>
+{% endblock %}
+    </body>
+
+</html>

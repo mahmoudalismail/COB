@@ -1,0 +1,83 @@
+html { overflow: -moz-scrollbars-vertical; 
+background-color: #f5f5f5;}
+
+#original{
+	/*background: #C0C0C0;*/
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    color: #3C3D3F;
+    background: #f5f5f5;
+}
+
+#content{
+	margin: auto;
+	background: #FFFFFF;
+    display: block;
+    background-color: #f5f5f5;
+}
+
+#icon{
+	padding-top: 30px;
+}
+
+#intro{
+	/*margin-left: 30px;*/
+	width: 500px;
+	float: right;
+	font-size: 18px;
+	margin-right: 90px;
+	margin-top: 15px;
+	background-color: #f5f5f5;
+}
+
+#icon > img{
+	margin-top: 147px;
+	margin-left: 40px;
+	height: 400px; 
+	float: left;
+}
+
+#strip{
+	margin-top: 161px;
+	height:10px;
+	line-height:24px;
+	font-size:13px;
+	background:#330000;
+	z-index:4;
+	box-shadow: 5px 5px 2px #888888;
+}
+
+#clublist{
+	margin-left: 35px;
+	height: 150px;
+}
+
+#header{
+	margin-left: 15px;
+}
+#header > img{
+	height: 100px;
+}
+
+#headerstrip{
+	margin-top: 20px;
+	height:5px;
+	line-height:24px;
+	font-size:13px;
+	background:#330000;
+	z-index:4;
+}
+
+#iconmini > img{
+	width: 290px;
+	margin-top: 8px;
+}
+
+#chart_div{
+	margin: auto;
+}
+
+#balance{
+	color: #006dcc;
+	font-size: 20px;
+}

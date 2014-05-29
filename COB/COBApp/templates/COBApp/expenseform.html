@@ -1,0 +1,212 @@
+{% extends "COBApp/header.html" %}
+
+{% load staticfiles %}
+
+{% block navigation %} 
+    <li>
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+    </li>
+    <li class='active'>
+        <a href="{% url 'expenseform' %}">New Expense Forms</a>
+    </li>
+    {% if username != 'admin' %}
+    <li>
+        <a href="{% url 'history' clubID %}">Transaction History</a>
+    </li>
+    {% endif %}
+{% endblock %}
+
+
+{% block content %} 
+                <!--/span-->
+                <div class="span9" id="content">
+                      <!-- morris stacked chart -->
+                    <div class="row-fluid">
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">New Expense Form</div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+                                     <form class="form-horizontal" enctype="multipart/form-data" action="{% url 'submitExpenseForm' %}" method="post">
+                                     {% csrf_token %}
+                                      <fieldset>
+                                        <legend>Expense Form 2013-2014</legend>
+                                            <p>Thank you for making a purchase to support your respective student club. Please fill out this form and submit one form for each receipt. </br>Each receipt must be submitted to your club advisor within 10 business days of purchase</br>All prizes must be pre-approved by your advisor, must be purchased on the Tartan Card and cannot exceed 250 QAR. A prize form is required to submit this form in these instances.</br>Purchases under 250 QAR with personal money can be reimbursed in cash. Purchases over 250 QAR will require a direct deposit reimbursement.</p></br></br>
+                                        
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput">Your Name</label>
+                                          <div class="controls">
+                                            <input class="input-xlarge focused" id="focusedInput" type="text" name="payer">
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput">Email Address</label>
+                                          <div class="controls">
+                                            <input class="input-xlarge focused" id="focusedInput" type="text" name="email">
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="select01">Organization</label>
+                                          <div class="controls">
+                                            <select id="select01" class="chzn-select" name="club_name">
+                                              <option></option>
+                                              {% if clubName %}
+                                              <option>{{clubName}}</option>
+                                              {% else %}
+                                                {% if all_clubs %}
+                                                    {% for club in all_clubs %}
+                                                    <option>{{club.clubName}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                              {% endif %}
+                                            </select>
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="select01">Category of purchase</label>
+                                          <div class="controls">
+                                            <select id="select01" class="chzn-select" name="catOfPurchase">
+                                              <option></option>
+                                              <option>Printing banners, booklets, roll ups</option>
+                                              <option>Supplies for events</option>
+                                              <option>Giveaways</option>
+                                              <option>Prizes</option>
+                                              <option>Food, snacks, drinks</option>
+                                              <option>Transportation</option>
+                                              <option>Entrance Fees</option>
+                                              <option>Rental Fee (bouncy castles, tents, other equipment)</option>
+                                              <option>Professional Fees (organizational dues)</option>
+                                              <option>Non-capital equipment (camera, rechargeable batteries, portable printer)</option>
+                                            </select>
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="select01">Method of payment</label>
+                                          <div class="controls">
+                                            <select id="select01" class="chzn-select" name="method">
+                                                <option></option>
+                                                <option>Personal Money</option>
+                                                <option>Tartan Card</option>
+                                                <option>Purchase Order</option>
+                                              </select>
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput">Vendor or Store</label>
+                                          <div class="controls">
+                                            <input class="input-xlarge focused" id="focusedInput" type="text" name="store">
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="focusedInput">Purchase amount (QAR)</label>
+                                          <div class="controls">
+                                            <input class="input-xlarge focused" id="focusedInput" type="text" name="amount">
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="date01">Date of purchase</label>
+                                          <div class="controls">
+                                            <input type="text" class="input-xlarge datepicker" id="date01" data-date-format="yyyy-mm-dd" value="yyyy-mm-dd" name="date">
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="date01">Date of event/program</label>
+                                          <div class="controls">
+                                            <input type="text" class="input-xlarge datepicker" id="date01" data-date-format="yyyy-mm-dd" value="yyyy-mm-dd" name="dateEvent">
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="textarea2">What did you buy?</label>
+                                          <div class="controls">
+                                            <textarea class="input-xlarge textarea" style="width: 500px; height: 100px" name="purchases"></textarea>
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="textarea2">Why did you buy it?</label>
+                                          <div class="controls">
+                                            <textarea class="input-xlarge textarea"style="width: 500px; height: 100px" name="justification"></textarea>
+                                          </div>
+                                        </div>
+
+                                        <div class="control-group">
+                                          <label class="control-label" for="textarea2">Upload Receipt</label>
+                                          <div class="controls">
+                                            <input type="file" id="receipt" name="receipt"/>
+                                          </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="form-actions">
+                                          <button type="submit" class="btn btn-primary">Save changes</button>
+                                          <button type="reset" class="btn">Cancel</button>
+                                        </div>
+                                      </fieldset>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+
+
+                </div>
+            </div>
+            <hr>
+
+        </div>
+        <!--/.fluid-container-->
+        <link href="{% static 'vendors/datepicker.css' %}" rel="stylesheet" media="screen">
+        <link href="{% static 'vendors/uniform.default.css' %}" rel="stylesheet" media="screen">
+        <link href="{% static 'vendors/chosen.min.css' %}" rel="stylesheet" media="screen">
+
+       <script src="{% static 'vendors/jquery-1.9.1.js' %}"></script>
+        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'vendors/jquery.uniform.min.js' %}"></script>
+        <script src="{% static 'vendors/chosen.jquery.min.js' %}"></script>
+        <script src="{% static 'vendors/bootstrap-datepicker.js' %}"></script>
+        <script src="{% static 'vendors/wizard/jquery.bootstrap.wizard.min.js' %}"></script>
+
+
+        <script src="{% static 'assets/scripts.js' %}"></script>
+        <script>
+        $(function() {
+            $(".datepicker").datepicker();
+            $(".uniform_on").uniform();
+            $(".chzn-select").chosen();
+            $('#rootwizard').bootstrapWizard({onTabShow: function(tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index+1;
+                var $percent = ($current/$total) * 100;
+                $('#rootwizard').find('.bar').css({width:$percent+'%'});
+                // If it's the last tab then hide the last button and show the finish instead
+                if($current >= $total) {
+                    $('#rootwizard').find('.pager .next').hide();
+                    $('#rootwizard').find('.pager .finish').show();
+                    $('#rootwizard').find('.pager .finish').removeClass('disabled');
+                } else {
+                    $('#rootwizard').find('.pager .next').show();
+                    $('#rootwizard').find('.pager .finish').hide();
+                }
+            }});
+            $('#rootwizard .finish').click(function() {
+                alert('Finished!, Starting over!');
+                $('#rootwizard').find("a[href*='tab1']").trigger('click');
+            });
+        });
+        </script>
+    </body>
+{% endblock %}
+</html>

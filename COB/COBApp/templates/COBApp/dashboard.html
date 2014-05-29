@@ -1,0 +1,139 @@
+{% extends "COBApp/header.html" %}
+
+       
+{% load staticfiles %}
+
+{% block navigation %} 
+    <li  class='active'>
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+    </li>
+    <li>
+        <a href="{% url 'expenseform' %}">New Expense Forms</a>
+    </li>
+    <li>
+        <a href="{% url 'history' clubID %}">Transaction History</a>
+    </li>
+{% endblock %}
+
+{% block content %} 
+                <!--/span-->
+                <div id = "clubID" style="display: none;">{{clubID}}</div>
+                <div class="span9" id="content">
+                   
+                    <div class="row-fluid">
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">Club's Spending</div>
+                                
+                            </div>
+                            <div class="block-content collapse in">
+                            <script src="{% static 'COBApp/js/script.js' %}"></script>    
+                                <div class="span9">
+                                    <div id="chart_div" style="width: 400; height: 300; align="center" ">
+                                    </div>
+                                    <div class="chart-bottom-heading">
+                                        <span class="label label-info"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span8">
+                            <!-- block -->
+                             <div class="block">
+                                <div class="navbar navbar-inner block-header">
+                                    <div class="muted pull-left">Transaction Summary</div>
+                                </div>
+                                <div class="block-content collapse in">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Event Name</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- stacking all the expenses in here -->
+                                        <tbody>
+                                        {% if summary%}
+                                            {% for i in summary %}
+                                            <tr>
+                                                <td>{{i.date}}</td>
+                                                <td>{{i.catOfPurchase}}</td>
+                                                <td>QAR {{i.amount}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /block -->
+                        </div>
+                        <div class="span4">
+                            <!-- block -->
+                            <div class="block">
+                                <div class="navbar navbar-inner block-header">
+                                    <div class="muted pull-left">Current Balance</div>
+                                </div>
+                                <div class="block-content collapse in">
+                                    <div class="span9">
+                                            <table class="table">
+                                            <thead>
+                                                <th></th>
+                                                <th> QAR</th>                            
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                  <td>Allocated Budget</td><td>{{allocBudget}} </td>
+                                                </tr>
+                                                <tr>
+                                                  <td>Total Expenses</td><td>{{totalExpenses}}</td>
+                                                </tr>
+                                                <tr>
+                                                  <td><div id='balance'>Balance</div></td><td><div id='balance'>{{balance}}</div></td>
+                                                </tr>
+
+
+                                            </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                
+                            </div>
+                            <!-- /block -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        
+        </div>
+
+        <!--/.fluid-container-->
+        <script src="{% static 'vendors/jquery-1.9.1.js' %}"></script>
+        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'vendors/jquery.uniform.min.js' %}"></script>
+        <script src="{% static 'vendors/chosen.jquery.min.js' %}"></script>
+        <script src="{% static 'vendors/bootstrap-datepicker.js' %}"></script>
+        <script src="{% static 'vendors/wizard/jquery.bootstrap.wizard.min.js' %}"></script>
+        <script src="{% static 'vendors/easypiechart/jquery.easy-pie-chart.js' %}"></script>
+        <script src="{% static 'assets/scripts.js' %}"></script>
+
+       
+        <link href="{% static 'vendors/datepicker.css' %}" rel="stylesheet" media="screen">
+        <link href="{% static 'vendors/uniform.default.css' %}" rel="stylesheet" media="screen">
+        <link href="{% static 'vendors/chosen.min.css' %}" rel="stylesheet" media="screen">
+        <script>
+        $(function() {
+            // Easy pie charts
+            $('.chart').easyPieChart({animate: 1000});
+        });
+        </script>
+    </body>
+{% endblock %}
+</html>

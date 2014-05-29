@@ -1,0 +1,57 @@
+{% load staticfiles %}
+
+<html>
+<head>
+	<title>The COB - Clubs and Organizations Budget</title>
+	 <link href="{% static "COBApp/css/style.css" %}" rel="stylesheet" type="text/css"/>
+	 <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+</head>
+
+<body id="original">
+
+	<div id="content">
+		<div id="icon">
+			<img src="{% static "COBApp/media/logo.png" %}">
+		</div>
+		<div id="strip"></div>
+		<div id="intro">
+			<h1>Welcome to the COB! </h1>
+			<p>COB stands for "Clubs and Organizations Budget" - a portal that allows the executives of the different clubs and organizations to keep track of their financial activity during their operation at CMUQ. </br> As of 2013-2014, there are 30 clubs on campus:</p></br>
+				
+			<marquee id="clublist" behavior="scroll" direction="down" scrollamount="5">
+				<ul>All Around</ul>
+				<ul>Basketball Team - Men's</ul>
+				<ul>Biological Sciences</ul>
+				<ul>cmBA</ul>
+				<ul>CMFA</ul>
+				<ul>Computing Club</ul>
+				<ul>Consulting Club</ul>
+				<ul>Cricket</ul>
+				<ul>Cultural Exchange Club</ul>
+				<ul>Debating Society</ul>
+				<ul>Desi Club</ul>
+				<ul>Football</ul>
+				<ul>Gaming Club</ul>
+				<ul>Hackathon</ul>
+				<ul>Language Bridges</ul>
+				<ul>MUN Society</ul>
+				<ul>Music Club</ul>
+				 <ul>Photo-Club</ul>
+				<ul>Qatar Association of Information Systems</ul>
+				<ul>Qatari Student Association</ul>
+				<ul>Scotty for Service</ul>
+				<ul>Society of Innovative Tartans</ul>
+				<ul>Table Tennis Club</ul>
+				<ul>The Andrew</ul>
+				<ul>The Big Movement</ul>
+				 <ul>Volleyball</ul>
+				 <ul>Women's Initiatives Club</ul>
+			</marquee>
+			</br></br>
+			<button type="button" class="btn btn-inverse btn-large" onclick="location.href='/COBApp/login'">Login</button>
+
+			
+		</div>
+	</div>
+</body>
+</html>

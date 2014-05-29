@@ -1,0 +1,112 @@
+{% extends "COBApp/header.html" %}
+
+{% block navigation %} 
+    <li class='active'>
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+    </li>
+{% endblock %}
+
+{% load staticfiles %}
+
+{% block content %}
+                <!--/span-->
+<div class="span9" id="content">
+                    <div class="row-fluid">
+                        
+                    <div class="row-fluid">
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">All Available Clubs</div>
+                              
+                            </div>
+                            <div class="block-content collapse in">
+                                {% if clubs %}
+                                    {% for club in clubs %}
+                                  <div class="span3">
+                                    <a href="/COBApp/showDashboard/{{club.id}}/" class="thumbnail">
+                                        <img style="width: 260px; height: 180px;" src="{% url 'decode' club.id %}">
+                                    </a>
+                                  </div>
+                                    {% endfor %}
+                                {% endif %}
+                                </div>
+                            
+                        </div>
+                        <!-- /block -->
+                    <div class="row-fluid">
+
+                        <div class="span6">
+                            <div class="block">
+                                <div class="navbar navbar-inner block-header">
+                                    <div class="muted pull-left">
+                                        <i class="icon-plus"></i>
+                                        <strong>Add New</strong>
+                                    </div>
+                                </div>
+                                <div class="block-content collapse in">
+                                    <table class="table">
+                                    <tbody>
+                                        <tr>
+                                          <td><a href="/admin/COBApp/club/add">Club</a></td>
+                                        </tr>
+                                        <tr>
+                                          <td><a href="/admin/COBApp/member/add">Member</a></td>
+                                        </tr>
+                                        <tr>
+                                          <td><a href="/admin/COBApp/clubmember/add">Club Member(s)</a></td>
+                                        </tr>
+                                        <tr>
+                                          <td><a href="{% url 'expenseform' %}">Club Expense</a></td>
+                                        </tr>
+
+                                      </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="span6">
+                            <div class="block">
+                                <div class="navbar navbar-inner block-header">
+                                    <div class="muted pull-left">
+                                        <i class="icon-pencil"></i>
+                                        <strong>Modify</strong>
+                                    </div>
+                                </div>
+                                <div class="block-content collapse in">
+                                    <table class="table">
+                                    <tbody>
+                                        <tr>
+                                          <td><a href="/admin/COBApp/club">Club</a></td>
+                                        </tr>
+                                        <tr>
+                                          <td><a href="/admin/COBApp/member">Member</a></td>
+                                        </tr>
+                                        <tr>
+                                          <td><a href="/admin/COBApp/clubmember">Club Member(s)</a></td>
+                                        </tr>
+                                        <tr>
+                                          <td><a href="/admin/COBApp/budget">Club Budget</a></td>
+                                        </tr>
+                                        <tr>
+                                           <td><a href="/admin/COBApp/expenses">Club Expenses</a></td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+{% endblock%}
+        <!--/.fluid-container-->
+    </body>
+
+</html>
